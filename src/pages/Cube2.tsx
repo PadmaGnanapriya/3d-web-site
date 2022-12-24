@@ -1,14 +1,21 @@
 import React, {useState} from "react";
 import "./cube2.scss";
+import {translate} from "../it8n";
 
-const Cube2: React.FC = () => {
+type propType = {
+  language: string;
+}
+
+const Cube2: React.FC<propType> = (props) => {
+  const {language} = props;
+
   const [xValue, setXValue] = useState(-20);
   const [yValue, setYValue] = useState(100);
 
   console.log(xValue, yValue);
   return (
     <>
-      <h1>Cube 2</h1>
+      <h1>{translate("cube", language)} 2</h1>
       <div id="cube-2"
            onDrag={(e) => {
              console.log(e.clientX, e.clientY);
@@ -30,7 +37,7 @@ const Cube2: React.FC = () => {
           )
         }
         <div style={{WebkitTransform: `rotateX(270deg) rotateY(0deg) translateZ(63px)`}}/>
-        <div style={{WebkitTransform: `rotateX($90deg) translateZ(63px)`}}/>
+        <div style={{WebkitTransform: `rotateX(90deg) translateZ(63px)`}}/>
       </div>
     </>
   )

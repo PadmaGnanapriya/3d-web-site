@@ -1,8 +1,14 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import {translate} from "../it8n";
 
-const Cylinder1: React.FC = () => {
+type propType = {
+  language: string;
+}
+
+const Cylinder1: React.FC<propType> = (props) => {
+  const {language} = props;
 
   const Cylinder = () => {
     return (
@@ -15,6 +21,7 @@ const Cylinder1: React.FC = () => {
 
   return (
     <>
+      <h1>{translate("cylinder", language)} 1</h1>
       <Canvas style={{height: '85vh'}}>
         <OrbitControls />
         <ambientLight intensity={0.5} />

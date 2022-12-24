@@ -1,13 +1,19 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import {translate} from "../it8n";
 
-const Cone1: React.FC = () => {
+type propType = {
+  language: string;
+}
+
+const Cone1: React.FC<propType> = (props) => {
+  const {language} = props;
 
   const Cone = () => {
     return (
-      <mesh scale={[1.1,1.1, 1.1]} rotation={[0.5, 0.5, 0]}>
-        <cylinderGeometry attach="geometry" args={[0,1.5,3,4,1]}/>
+      <mesh scale={[1.1,1, 1.1]} rotation={[0.5, 0.5, 0]}>
+        <cylinderGeometry attach="geometry" args={[0,1.5,2,4,1]}/>
         <meshLambertMaterial attach="material" color="#2c3e50" />
       </mesh>
     )
@@ -15,6 +21,7 @@ const Cone1: React.FC = () => {
 
   return (
     <>
+      <h1>{translate("pyramid", language)} 1</h1>
       <Canvas style={{height: '85vh'}}>
         <OrbitControls />
         <ambientLight intensity={0.5} />

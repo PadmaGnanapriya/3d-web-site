@@ -1,41 +1,58 @@
-import React from 'react';
-import './App.css';
+import React, {Suspense, useEffect, useState} from 'react';
+import './App.scss';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Cone1 from "./pages/Cone1";
-import Cone2 from "./pages/Cone2";
-import Cube1 from "./pages/Cube1";
-import Cube2 from "./pages/Cube2";
-import Cylinder1 from "./pages/Cylinder1";
-import Cylinder2 from "./pages/Cylinder2";
-import Home from "./pages/Home";
-import Prism1 from "./pages/Prism1";
-import Prism2 from "./pages/Prism2";
-import Pyramid1 from "./pages/Pyramid1";
-import Pyramid2 from "./pages/Pyramid2";
-import Sphere1 from "./pages/Sphere1";
-import Sphere2 from "./pages/Sphere2";
 
+const Cube1 = React.lazy(() => import("./pages/Cube1"));
+const Cube2 = React.lazy(() => import("./pages/Cube2"));
+const Cylinder1 = React.lazy(() => import("./pages/Cylinder1"));
+const Cylinder2 = React.lazy(() => import("./pages/Cylinder2"));
+const Home = React.lazy(() => import("./pages/Home"));
+const Pyramid1 = React.lazy(() => import("./pages/Pyramid1"));
+const Pyramid2 = React.lazy(() => import("./pages/Pyramid2"));
+const Sphere1 = React.lazy(() => import("./pages/Sphere1"));
+const Sphere2 = React.lazy(() => import("./pages/Sphere2"));
 
 function App() {
+  const [language, setLanguage] = useState('EN');
+  const onChangeLanguage = (lang: string) => {
+    setLanguage(lang);
+    localStorage.setItem('lang', lang);
+  }
+
+  useEffect(() => {
+    const language = localStorage.getItem('lang');
+    if (language) {
+      setLanguage(language);
+    }
+  }, [])
+
   return (
     <div className="App" style={{background: '#bdc3c7', minHeight: '100vh'}}>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/cone' element={<Cone1/>}/>
-          <Route path='/cone-2' element={<Cone2/>}/>
-          <Route path='/cube' element={<Cube1/>}/>
-          <Route path='/cube-2' element={<Cube2/>}/>
-          <Route path='/cylinder' element={<Cylinder1/>}/>
-          <Route path='/cylinder-2' element={<Cylinder2/>}/>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/prism' element={<Prism1/>}/>
-          <Route path='/prism-2' element={<Prism2/>}/>
-          <Route path='/pyramid' element={<Pyramid1/>}/>
-          <Route path='/pyramid-2' element={<Pyramid2/>}/>
-          <Route path='/sphere' element={<Sphere1/>}/>
-          <Route path='/sphere-2' element={<Sphere2/>}/>
-        </Routes>
-      </BrowserRouter>
+      <div className="header">
+        <a href="/" title="Click to navigate to home">&#x2302; Home</a>
+        <select className="language-select" onChange={(e) => onChangeLanguage(e.target.value)} value={language}>
+          <option value="EN">English</option>
+          <option value="SI">සිංහල</option>
+          <option value="TM">தமிழ்</option>
+        </select>
+      </div>
+      <div className="bottom-div">
+        <Suspense fallback={<div>Loading...</div>}>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/cube' element={<Cube1 language={language}/>}/>
+              <Route path='/cube-2' element={<Cube2 language={language}/>}/>
+              <Route path='/cylinder' element={<Cylinder1 language={language}/>}/>
+              <Route path='/cylinder-2' element={<Cylinder2 language={language}/>}/>
+              <Route path='/' element={<Home language={language}/>}/>
+              <Route path='/pyramid' element={<Pyramid1 language={language}/>}/>
+              <Route path='/pyramid-2' element={<Pyramid2 language={language}/>}/>
+              <Route path='/sphere' element={<Sphere1 language={language}/>}/>
+              <Route path='/sphere-2' element={<Sphere2 language={language}/>}/>
+            </Routes>
+          </BrowserRouter>
+        </Suspense>
+      </div>
     </div>
   );
 }

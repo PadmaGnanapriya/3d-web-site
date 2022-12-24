@@ -1,26 +1,24 @@
 import React, {useState} from "react";
 import "./sphere2.scss"
+import {translate} from "../it8n";
 
-const Page: React.FC = () => {
-  const [xValue, setXValue] = useState(-20);
-  const [yValue, setYValue] = useState(10);
+type propType = {
+  language: string;
+}
+
+const Page: React.FC<propType> = (props) => {
+  const {language} = props;
 
   return (
-    <section className="stage"
-             onDrag={(e) => {
-               console.log(e.clientX, e.clientY);
-               if (e.clientX !== 0) {
-                 setYValue(e.clientX)
-               }
-               if (e.clientY !== 0) {
-                 setXValue(e.clientY);
-               }
-             }}
-             style={{transform: 'translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);'}}
-             // style={{transform: `rotateX(${xValue}deg) rotateY(${yValue}deg)`}}
-    >
-      <figure className="ball"><span className="shadow"/></figure>
-    </section>  )
+    <>
+      <h1>{translate("sphere", language)} 2</h1>
+      <section className="stage"
+               style={{transform: 'translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);'}}
+      >
+        <figure className="ball"><span className="shadow"/></figure>
+      </section>
+    </>
+  )
 }
 
 export default Page;
