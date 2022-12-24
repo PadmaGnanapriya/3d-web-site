@@ -1,0 +1,36 @@
+#shape {
+    position: relative;
+    margin: 0 auto;
+    top: 170px;
+    width: 125px;
+    height: 125px;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateX(-5deg) rotateY(-30deg);
+    -moz-transform: rotateX(-5deg) rotateY(-30deg);
+    transform: rotateX(-5deg) rotateY(-30deg);
+    -webkit-transition: -webkit-transform 2s;
+    -moz-transition: -moz-transform 2s;
+    transition: transform 2s;
+    /*animation: animate 5s linear infinite;*/
+}
+
+#shape > div {
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    border: 1px solid white;
+    background-color: #2c3e50;
+    opacity: .8;
+}
+
+/*@keyframes animate {*/
+/*    0% {*/
+/*        transform: rotateX(-20deg) rotateY(360deg);*/
+/*    }*/
+/*    100% {*/
+/*        transform: rotateX(-20deg) rotateY(0deg);*/
+/*    }*/
+/*}*/
+
