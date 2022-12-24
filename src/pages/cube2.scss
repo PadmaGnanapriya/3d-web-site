@@ -1,4 +1,4 @@
-#shape {
+#cube-2 {
     position: relative;
     margin: 0 auto;
     top: 170px;
@@ -13,10 +13,9 @@
     -webkit-transition: -webkit-transform 2s;
     -moz-transition: -moz-transform 2s;
     transition: transform 2s;
-    /*animation: animate 5s linear infinite;*/
 }
 
-#shape > div {
+#cube-2 > div {
     position: absolute;
     width: 125px;
     height: 125px;
@@ -26,11 +25,17 @@
 }
 
 /*@keyframes animate {*/
-/*    0% {*/
-/*        transform: rotateX(-20deg) rotateY(360deg);*/
-/*    }*/
-/*    100% {*/
-/*        transform: rotateX(-20deg) rotateY(0deg);*/
-/*    }*/
+    /*0% {*/
+    /*    transform: rotateX(-20deg) rotateY(360deg);*/
+    /*}*/
+    /*100% {*/
+    /*    transform: rotateX(-20deg) rotateY(0deg);*/
+    /*}*/
+    /*0% {*/
+    /*    transform: rotateX(360deg) rotateY(-20deg);*/
+    /*}*/
+    /*100% {*/
+    /*    transform: rotateX(0deg) rotateY(-20deg);*/
+    /*}*/
 /*}*/
 

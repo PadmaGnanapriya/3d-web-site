@@ -1,0 +1,8 @@
+{
+  "cylinder": "Cylinder",
+  "cone": "Cone",
+  "cube": "Cube",
+  "sphere": "Sphere",
+  "pyramid": "Pyramid",
+  "prism": "Prism"
+}

@@ -2,12 +2,12 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 
-const Page1: React.FC = () => {
+const Cone1: React.FC = () => {
 
-  const Box = () => {
+  const Cone = () => {
     return (
-      <mesh scale={[2,2,2]} rotation={[0.5, 0.5, 0]}>
-        <boxBufferGeometry attach="geometry" />
+      <mesh scale={[1.1,1.1, 1.1]} rotation={[0.5, 0.5, 0]}>
+        <cylinderGeometry attach="geometry" args={[0,1.5,3,4,1]}/>
         <meshLambertMaterial attach="material" color="#2c3e50" />
       </mesh>
     )
@@ -15,14 +15,14 @@ const Page1: React.FC = () => {
 
   return (
     <>
-      <Canvas>
+      <Canvas style={{height: '85vh'}}>
         <OrbitControls />
         <ambientLight intensity={0.5} />
         <spotLight position={[10,15,10]} angle={0.3} />
-        <Box/>
+        <Cone/>
       </Canvas>
     </>
   )
 }
 
-export default Page1;
+export default Cone1;

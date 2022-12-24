@@ -1,0 +1,35 @@
+$pi: 3.14159265358979;
+$cylinder-width: 90vw;
+$face-count: 50;
+$face-deg: (360deg / $face-count);
+$face-width: ($cylinder-width / $face-count);
+$face-shift: ($cylinder-width / $pi / 2);
+
+.holder {
+  transform-style: preserve-3d;
+  transform: rotateX(-35deg);
+}
+.cylinder {
+  position: relative;
+  height: 50vw;
+  width: $cylinder-width;
+  transform-style: preserve-3d;
+  animation: spin 7s infinite linear;
+}
+.face {
+  position: absolute;
+  background-color: #da0060;
+  opacity: 0.7;
+  height: 100%;
+  width: $face-width;
+  top: 50%;
+  left: 50%;
+  &:nth-child(1) {
+    background: purple;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotateY(-360deg);
+  }
+}
