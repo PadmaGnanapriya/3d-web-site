@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "./sphere2.scss"
 import {translate} from "../it8n";
 
