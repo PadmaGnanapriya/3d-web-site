@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+supporting node version is 16LTS
+Site: https://d-web-site.web.app/
+
+
 ## Available Scripts
 
 In the project directory, you can run:
