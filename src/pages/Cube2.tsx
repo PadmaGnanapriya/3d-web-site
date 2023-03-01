@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./cube2.scss";
 import {translate} from "../it8n";
 
@@ -9,10 +9,16 @@ type propType = {
 const Cube2: React.FC<propType> = (props) => {
   const {language} = props;
 
+  useEffect(() => {
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    if (sessionStorage.getItem('Cube2') === null) {
+      sessionStorage.setItem('Cube2', String(loadTime))
+    }
+  }, []);
+
   const [xValue, setXValue] = useState(-20);
   const [yValue, setYValue] = useState(100);
 
-  console.log(xValue, yValue);
   return (
     <>
       <h1>{translate("cube", language)} 2</h1>

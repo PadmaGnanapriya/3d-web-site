@@ -11,6 +11,7 @@ const Pyramid1 = React.lazy(() => import("./pages/Pyramid1"));
 const Pyramid2 = React.lazy(() => import("./pages/Pyramid2"));
 const Sphere1 = React.lazy(() => import("./pages/Sphere1"));
 const Sphere2 = React.lazy(() => import("./pages/Sphere2"));
+const Feedback = React.lazy(() => import("./pages/Feedback"));
 
 function App() {
   const [language, setLanguage] = useState('EN');
@@ -49,6 +50,7 @@ function App() {
               <Route path='/pyramid-2' element={<Pyramid2 language={language}/>}/>
               <Route path='/sphere' element={<Sphere1 language={language}/>}/>
               <Route path='/sphere-2' element={<Sphere2 language={language}/>}/>
+              <Route path='/feedback' element={<Feedback language={language}/>}/>
             </Routes>
           </BrowserRouter>
         </Suspense>

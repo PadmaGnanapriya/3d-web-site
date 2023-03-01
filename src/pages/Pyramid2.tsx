@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./pyramid2.scss";
 import {translate} from "../it8n";
 
@@ -8,6 +8,14 @@ type propType = {
 
 const Cube2: React.FC<propType> = (props) => {
   const {language} = props;
+
+  useEffect(() => {
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    if (sessionStorage.getItem('Pyramid2') === null) {
+      sessionStorage.setItem('Pyramid2', String(loadTime))
+    }
+  }, []);
+
   const [xValue, setXValue] = useState(-20);
   const [yValue, setYValue] = useState(100);
 

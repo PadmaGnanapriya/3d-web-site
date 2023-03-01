@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./sphere2.scss"
 import {translate} from "../it8n";
 
@@ -8,6 +8,13 @@ type propType = {
 
 const Page: React.FC<propType> = (props) => {
   const {language} = props;
+
+  useEffect(() => {
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    if (sessionStorage.getItem('Sphere2') === null) {
+      sessionStorage.setItem('Sphere2', String(loadTime))
+    }
+  }, []);
 
   return (
     <>

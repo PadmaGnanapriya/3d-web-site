@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Canvas} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import {translate} from "../it8n";
@@ -9,6 +9,13 @@ type propType = {
 
 const Cube1: React.FC<propType> = (props) => {
   const {language} = props;
+
+  useEffect(() => {
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    if (sessionStorage.getItem('Cube1') === null) {
+      sessionStorage.setItem('Cube1', String(loadTime))
+    }
+  }, []);
 
   const Box = () => {
     return (

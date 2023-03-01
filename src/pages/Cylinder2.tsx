@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./cylinder2.scss"
 import {translate} from "../it8n";
 
@@ -8,6 +8,13 @@ type propType = {
 
 const Page: React.FC<propType> = (props) => {
   const {language} = props;
+
+  useEffect(() => {
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    if (sessionStorage.getItem('Cylinder2') === null) {
+      sessionStorage.setItem('Cylinder2', String(loadTime))
+    }
+  }, []);
 
   const [xValue, setXValue] = useState(-20);
   const [yValue, setYValue] = useState(100);
