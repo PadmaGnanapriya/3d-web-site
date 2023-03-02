@@ -42,8 +42,9 @@ const Home: React.FC<propType> = (props) => {
   const [aboutYou, setAboutYou] = useState<string | null>('');
 
   const roles = [
-    {value: 'Teacher', label: 'Teacher'},
-    {value: 'parents or guardians', label: 'parents or guardians'},
+    {value: 'School Teacher', label: 'School Teacher'},
+    {value: 'tuition Teacher', label: 'tuition Teacher'},
+    {value: 'parent', label: 'parent'},
     {value: 'Student', label: 'Student'},
     {value: 'professor', label: 'professor'},
     {value: 'School administrator or principal', label: 'School administrator or principal'},
@@ -113,6 +114,142 @@ const Home: React.FC<propType> = (props) => {
     aboutYou
   }
 
+  const aboutPlaceHolder = role === 'School Teacher'
+    ? "Eg: \nI'm Nalinda Samansiri, and I work as a math teacher at Mahinda College Galle."
+    : "Eg: \nI'm Nalinda Samansiri, and I work as an IT lecturer at ESOFT Metro Campus, Galle."
+
+  console.log(document.cookie);
+  console.log(navigator.geolocation);
+  console.log(window.history);
+  console.log(navigator.geolocation);
+  let os = navigator.platform;
+  console.log(os); // e.g. "Windows", "MacIntel", "Linux armv7l", etc.
+  let browser = navigator.userAgent;
+  console.log(browser); // e.g. "Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+  // @ts-ignore
+  // let info = platform.parse(navigator.userAgent);
+  // console.log(info.name); // e.g. "Chrome"
+  // console.log(info.version); // e.g. "91.0.4472.124"
+  // console.log(info.os); // e.g. "Windows 10"
+  let screenWidth = window.screen.width;
+  let screenHeight = window.screen.height;
+  console.log(screenWidth + " x " + screenHeight); // e.g. "1920 x 1080"
+  const userAgent = navigator.userAgent;
+
+
+  let deviceType = "Other"
+  let OSName = "Unknown OS";
+  let OSVersion = "Unknown OS Version";
+  let userBrowser = "Unknown Browser";
+
+  if (userAgent.match(/Android/i)) {
+    deviceType = "Android phone or tablet";
+    if (userAgent.match(/Mobile/i)) {
+      deviceType = "Android phone";
+    } else {
+      deviceType = "Android tablet";
+    }
+  } else if (userAgent.match(/iPhone/i)) {
+    deviceType = "iPhone";
+  } else if (userAgent.match(/iPad/i)) {
+    deviceType = "iPad";
+  } else if (userAgent.match(/Windows Phone/i)) {
+    deviceType = "Windows Phone";
+  } else if (userAgent.match(/Windows NT/i) && userAgent.match(/Tablet PC/i)) {
+    deviceType = "Windows tablet";
+  } else if (userAgent.match(/Macintosh/i) && userAgent.match(/Intel/i)) {
+    deviceType = "Mac desktop or laptop";
+  } else if (userAgent.match(/Linux/i) && userAgent.match(/Android/i)) {
+    deviceType = "Android tablet";
+  } else if (userAgent.match(/Linux/i) && userAgent.match(/KFAPWI/i)) {
+    deviceType = "Amazon Kindle Fire";
+  } else if (userAgent.match(/RIM Tablet/i) || userAgent.match(/PlayBook/i)) {
+    deviceType = "BlackBerry PlayBook";
+  } else if (userAgent.match(/BB10/i)) {
+    deviceType = "BlackBerry 10 phone or tablet";
+  } else if (userAgent.match(/webOS/i)) {
+    deviceType = "HP TouchPad";
+  } else if (userAgent.match(/Kindle/i)) {
+    deviceType = "Amazon Kindle";
+  } else if (userAgent.match(/Silk/i)) {
+    deviceType = "Amazon Kindle Fire";
+  } else if (userAgent.match(/Nexus/i)) {
+    deviceType = "Google Nexus phone or tablet";
+  } else if (userAgent.match(/Xoom/i)) {
+    deviceType = "Motorola Xoom tablet";
+  } else if (userAgent.match(/Windows NT/i)) {
+    deviceType = "Windows laptop or Desktop";
+  }
+
+// Detect Browser
+  if (userAgent.indexOf("Edg") > -1) {
+    userBrowser = "Microsoft Edge";
+  } else if (userAgent.indexOf("Chrome") > -1) {
+    userBrowser = "Chrome";
+  } else if (userAgent.indexOf("Firefox") > -1) {
+    userBrowser = "Firefox";
+  } else if (userAgent.indexOf("Safari") > -1) {
+    userBrowser = "Safari";
+  } else if (userAgent.indexOf("Trident") > -1) {
+    userBrowser = "Microsoft Internet Explorer";
+  } else if (userAgent.indexOf("Opera") > -1) {
+    userBrowser = "Opera";
+  }
+
+// Detect Windows OS
+  if (userAgent.indexOf("Win") !== -1) {
+    OSName = "Windows";
+    if (userAgent.indexOf("Windows NT 10.0") !== -1) {
+      OSVersion = "Windows 10";
+    } else if (userAgent.indexOf("Windows NT 6.3") !== -1) {
+      OSVersion = "Windows 8.1";
+    } else if (userAgent.indexOf("Windows NT 6.2") !== -1) {
+      OSVersion = "Windows 8";
+    } else if (userAgent.indexOf("Windows NT 6.1") !== -1) {
+      OSVersion = "Windows 7";
+    } else if (userAgent.indexOf("Windows NT 6.0") !== -1) {
+      OSVersion = "Windows Vista";
+    } else if (userAgent.indexOf("Windows NT 5.1") !== -1) {
+      OSVersion = "Windows XP";
+    } else if (userAgent.indexOf("Windows NT 5.0") !== -1) {
+      OSVersion = "Windows 2000";
+    }
+  }
+// Detect macOS
+  else if (userAgent.indexOf("Mac") !== -1) {
+    OSName = "Mac OS";
+    if (userAgent.indexOf("Mac OS X 10.15") !== -1) {
+      OSVersion = "Catalina";
+    } else if (userAgent.indexOf("Mac OS X 10.14") !== -1) {
+      OSVersion = "Mojave";
+    } else if (userAgent.indexOf("Mac OS X 10.13") !== -1) {
+      OSVersion = "High Sierra";
+    } else if (userAgent.indexOf("Mac OS X 10.12") !== -1) {
+      OSVersion = "Sierra";
+    } else if (userAgent.indexOf("Mac OS X 10.11") !== -1) {
+      OSVersion = "El Capitan";
+    } else if (userAgent.indexOf("Mac OS X 10.10") !== -1) {
+      OSVersion = "Yosemite";
+    }
+  }
+// Detect Linux OS
+  else if (userAgent.indexOf("Linux") !== -1) {
+    OSName = "Linux";
+    if (userAgent.indexOf("Ubuntu") !== -1) {
+      OSVersion = "Ubuntu";
+    } else if (userAgent.indexOf("Fedora") !== -1) {
+      OSVersion = "Fedora";
+    } else if (userAgent.indexOf("Debian") !== -1) {
+      OSVersion = "Debian";
+    } else if (userAgent.indexOf("Mint") !== -1) {
+      OSVersion = "Mint";
+    }
+  }
+
+  console.log("Operating System: " + OSName);
+  console.log("Operating System Version: " + OSVersion);
+  console.log("Browser: " + userBrowser);
+  console.log("Device Type: " + deviceType);
   return (
     <div className="feedback-div">
       <div className="notice">
@@ -169,14 +306,14 @@ const Home: React.FC<propType> = (props) => {
       <CreatableSelect isClearable options={booleanOptions} onChange={(e: any) => setIsSuitableForChildren(e.value)}/>
       <div className="label">{translate("question12", language)}</div>
       <textarea rows={4} onChange={(e: any) => setExtra(e.target.value)}/>
-      <div className="label">{translate("question13", language)}</div>
-      <textarea rows={5} onChange={(e: any) => setAboutYou(e.target.value)}/>
+      <div className="label">{translate("question13", language)} (Optional)</div>
+      <textarea rows={5} onChange={(e: any) => setAboutYou(e.target.value)} placeholder={aboutPlaceHolder}/>
 
       <div className="text-align-center">
         <button disabled={isDisabled} className="feedback-btn" onClick={() => console.log(resultObj)}> Submit</button>
         {
           isDisabled &&
-          <small>{translate("disabledError", language)}</small>
+            <small>{translate("disabledError", language)}</small>
         }
       </div>
 
