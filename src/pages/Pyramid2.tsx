@@ -19,7 +19,6 @@ const Cube2: React.FC<propType> = (props) => {
   const [xValue, setXValue] = useState(-20);
   const [yValue, setYValue] = useState(100);
 
-  console.log(xValue, yValue);
   return (
     <>
       <h1>{translate("pyramid", language)} 2</h1>

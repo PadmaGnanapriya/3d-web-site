@@ -1,0 +1,72 @@
+.feedback-div {
+  text-align: left;
+  margin: auto;
+  max-width: 700px;
+  font-size: large;
+
+  .notice {
+    display: block;
+    border: 2px solid #293d4f;;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: small;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #293d4f;;
+  }
+
+  .label {
+    font-weight: 500;
+    margin-top: 30px;
+  }
+
+  .text-align-center {
+    text-align: center;
+
+    button:disabled {
+      cursor: not-allowed;
+      pointer-events: all !important;
+    }
+
+    small {
+      color: darkred;
+      display: block;
+      font-weight: 500;
+      font-size: small;
+    }
+  }
+
+  .css-13cymwt-control, textarea {
+    margin-top: 5px;
+  }
+
+  .wrapper-options {
+    display: flex;
+
+    span {
+      flex: 1;
+      display: block;
+      padding-top: 8px;
+      text-align: right;
+    }
+
+    .non-full-width {
+      flex: 2;
+    }
+  }
+
+  textarea {
+    width: calc(100% - 8px);
+    resize: vertical; /* user can resize vertically, but width is fixed */
+    border: none;
+    border-radius: 4px;
+    min-height: 35px;
+    padding: 5px;
+    font-size: large;
+
+    &:focus {
+      outline: 2px solid #2684ff
+    }
+
+  }
+}

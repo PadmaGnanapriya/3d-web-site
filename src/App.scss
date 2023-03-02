@@ -39,4 +39,23 @@
     margin-top: 50px;
     padding-top: 20px;
   }
+
+
+  .feedback-btn {
+    background-color: #293d4f;
+    color: whitesmoke;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    border: none;
+    padding: 7px 4vw;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 3px 3px 3px 1.5px rgba(0, 0, 0, 0.3);
+
+    &:hover{
+      transform: translateY(1px);
+      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+      transition-delay: 250ms;
+    }
+  }
 }

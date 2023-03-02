@@ -11,8 +11,10 @@ const Home: React.FC<propType> = (props) => {
   const {language} = props;
 
   return (
+    <>
     <div className="flex-div">
-      <p style={{textAlign: "left"}}> &emsp;{translate("description", language)} <br/> &emsp;{translate("thankYou", language)}</p>
+      <p style={{textAlign: "left"}}> &emsp;{translate("description", language)} <br/>
+        &emsp;{translate("thankYou", language)}</p>
       <Link to="/cube">
         <div className="card">{translate("cube", language)} 1</div>
       </Link>
@@ -47,6 +49,10 @@ const Home: React.FC<propType> = (props) => {
       {/*<div className="card" onClick={() => navigate('/pyramid')}>{translate("pyramid", language)} 1</div>*/}
       {/*<div className="card" onClick={() => navigate('/pyramid-2')}>{translate("pyramid", language)} 2</div>*/}
     </div>
+      <Link to="/feedback">
+        <button className="feedback-btn">{translate("feedback", language)} </button>
+      </Link>
+    </>
   )
 }
 export default Home;
