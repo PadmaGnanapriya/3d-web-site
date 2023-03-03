@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./pyramid2.scss";
 import {translate} from "../it8n";
+import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -21,7 +22,7 @@ const Cube2: React.FC<propType> = (props) => {
 
   return (
     <>
-      <h1>{translate("pyramid", language)} 2</h1>
+      <h1>{translate("pyramid", language)} 2 <span>(Non ThreeJs Powered)</span></h1>
       <div id="pyramid-2"
            onDrag={(e) => {
              console.log(e.clientX, e.clientY);
@@ -44,6 +45,8 @@ const Cube2: React.FC<propType> = (props) => {
         }
         <div style={{WebkitTransform: `rotateX(270deg) rotateY(0deg) translateZ(-15px)`}}/>
       </div>
+      {/* TODO : Create complex image page and point to it */}
+      <Link className="next-link" to="../feedback"><button>Next &rarr;</button></Link>
     </>
   )
 }

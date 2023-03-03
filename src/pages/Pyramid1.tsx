@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import {translate} from "../it8n";
+import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -28,13 +29,14 @@ const Cone1: React.FC<propType> = (props) => {
 
   return (
     <>
-      <h1>{translate("pyramid", language)} 1</h1>
+      <h1>{translate("pyramid", language)} 1 <span>(ThreeJs Powered)</span></h1>
       <Canvas style={{height: '85vh'}}>
         <OrbitControls />
         <ambientLight intensity={0.5} />
         <spotLight position={[10,15,10]} angle={0.3} />
         <Cone/>
       </Canvas>
+      <Link className="next-link" to="../pyramid-2"><button>Next &rarr;</button></Link>
     </>
   )
 }

@@ -1,6 +1,8 @@
 .App {
   text-align: center;
 
+
+
   .header {
     position: fixed;
     top: 0;
@@ -32,6 +34,43 @@
       position: absolute;
       right: 50px;
       top: 16px;
+      border-radius: 4px;
+    }
+  }
+
+  h1 {
+    margin-left: 4vw;
+    span {
+      color: darkred;
+      display: inline-block;
+      font-size: 25px;
+      transform: scale(.6, 1);
+      letter-spacing: 1px;
+
+    }
+  }
+
+  .next-link {
+    position: fixed;
+    bottom: 12px;
+    right: 8vw;
+
+    button {
+      background-color: #293d4f;
+      color: whitesmoke;
+      font-size: .8rem;
+      border-radius: 5px;
+      border: none;
+      padding: 7px 3vw;
+      cursor: pointer;
+      margin: 8px;
+      box-shadow: 3px 3px 3px 1.5px rgba(0, 0, 0, 0.3);
+
+      &:hover{
+        transform: translateY(1px);
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        transition-delay: 250ms;
+      }
     }
   }
 

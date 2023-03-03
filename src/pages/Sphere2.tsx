@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import "./sphere2.scss"
 import {translate} from "../it8n";
+import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -18,12 +19,13 @@ const Page: React.FC<propType> = (props) => {
 
   return (
     <>
-      <h1>{translate("sphere", language)} 2</h1>
+      <h1>{translate("sphere", language)} 2 <span>(Non ThreeJs Powered)</span></h1>
       <section className="stage"
                style={{transform: 'translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);'}}
       >
         <figure className="ball"><span className="shadow"/></figure>
       </section>
+      <Link className="next-link" to="../pyramid"><button>Next &rarr;</button></Link>
     </>
   )
 }

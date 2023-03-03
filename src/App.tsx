@@ -15,6 +15,7 @@ const Feedback = React.lazy(() => import("./pages/Feedback"));
 
 function App() {
   const [language, setLanguage] = useState('EN');
+  const [title, setTitle] = useState("UniLoad 3D")
   const onChangeLanguage = (lang: string) => {
     setLanguage(lang);
     localStorage.setItem('lang', lang);
@@ -25,12 +26,17 @@ function App() {
     if (language) {
       setLanguage(language);
     }
+    if (window.innerWidth > 900) {
+      setTitle('"UniLoad 3D" - A 3D website for university survey on page loading time')
+    }
   }, [])
 
   return (
     <div className="App" style={{background: '#bdc3c7', minHeight: '100vh'}}>
       <div className="header">
-        <a href="/" title="Click to navigate to home">&#x2302; Home</a>
+        <a href="/" title="Click to navigate to home">
+          {title}
+        </a>
         <select className="language-select" onChange={(e) => onChangeLanguage(e.target.value)} value={language}>
           <option value="EN">English</option>
           <option value="SI">සිංහල</option>

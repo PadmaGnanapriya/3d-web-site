@@ -1,7 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {translate} from "../it8n";
 import CreatableSelect from 'react-select/creatable';
-import "./feedback.scss"
+import "./feedback.scss";
+import axios from "axios";
+import {Link} from 'react-router-dom';
 
 
 type propType = {
@@ -20,19 +22,18 @@ const Home: React.FC<propType> = (props) => {
   const sphere1LoadTime = sessionStorage.getItem('Sphere1');
   const sphere2LoadTime = sessionStorage.getItem('Sphere2');
 
-
   const isDisabled = !(cube1LoadTime && cube2LoadTime && Cylinder1LoadTime && Cylinder2LoadTime &&
     pyramid1LoadTime && pyramid2LoadTime && sphere1LoadTime && sphere2LoadTime)
 
-
+  const [ip, setIP] = useState('');
   const [role, setRole] = useState<string | null>('');
   const [serviceProvider, setServiceProvider] = useState<string | null>('');
   const [network, setNetwork] = useState<string | null>('');
   const [ratingForThreeJsPowered, setRatingForThreeJsPowered] = useState<string | null>('');
   const [ratingForNonThreeJsPowered, setRatingForNonThreeJsPowered] = useState<string | null>('');
   const [isThreeJsDelayed, setIsThreeJsDelayed] = useState<string | null>('');
-  const [isThreeJsNavigatable, setIsThreeJsNavigatable] = useState<string | null>('');
-  const [isNonThreeJsNavigatable, setIsNonThreeJsNavigatable] = useState<string | null>('');
+  const [isThreeJsNavigable, setIsThreeJsNavigable] = useState<string | null>('');
+  const [isNonThreeJsNavigable, setIsNonThreeJsNavigable] = useState<string | null>('');
   const [isThreeJsLoadingTimeImpact, setIsThreeJsLoadingTimeImpact] = useState<string | null>('');
   const [isNonThreeJsLoadingTimeImpact, setIsNonThreeJsLoadingTimeImpact] = useState<string | null>('');
   const [recommended3DSite, setRecommended3DSite] = useState<string | null>('');
@@ -50,6 +51,7 @@ const Home: React.FC<propType> = (props) => {
     {value: 'School administrator or principal', label: 'School administrator or principal'},
     {value: 'Education policy maker', label: 'Education policy maker'},
     {value: 'Education consultant or expert', label: 'Education consultant or experts'},
+    {value: 'software Engineer', label: 'software Engineer'},
     {value: 'other', label: 'other'},
   ]
   const networkOptions = [
@@ -78,9 +80,9 @@ const Home: React.FC<propType> = (props) => {
     {value: '5', label: '5'}
   ];
   const booleanOptions = [
-    {value: 'yes', label: 'Yes'},
-    {value: 'no', label: 'No'},
-    {value: 'mayBe', label: 'May Be, Not sure'},
+    {value: 'yes', label: translate("yes", language)},
+    {value: 'no', label: translate("no", language)},
+    {value: 'mayBe', label: translate("mayBe", language)},
   ]
   const threeDType = [
     {value: 'ThreeJs powered', label: 'ThreeJs Powered'},
@@ -88,55 +90,21 @@ const Home: React.FC<propType> = (props) => {
     {value: 'both', label: 'both'},
   ]
 
-  const resultObj = {
-    cube1LoadTime,
-    cube2LoadTime,
-    Cylinder1LoadTime,
-    Cylinder2LoadTime,
-    pyramid1LoadTime,
-    pyramid2LoadTime,
-    sphere1LoadTime,
-    sphere2LoadTime,
-    role,
-    serviceProvider,
-    network,
-    ratingForThreeJsPowered,
-    ratingForNonThreeJsPowered,
-    isThreeJsDelayed,
-    isThreeJsNavigatable,
-    isNonThreeJsNavigatable,
-    isThreeJsLoadingTimeImpact,
-    isNonThreeJsLoadingTimeImpact,
-    recommended3DSite,
-    comparison,
-    isSuitableForChildren,
-    extra,
-    aboutYou
-  }
-
   const aboutPlaceHolder = role === 'School Teacher'
     ? "Eg: \nI'm Nalinda Samansiri, and I work as a math teacher at Mahinda College Galle."
     : "Eg: \nI'm Nalinda Samansiri, and I work as an IT lecturer at ESOFT Metro Campus, Galle."
 
-  console.log(document.cookie);
-  console.log(navigator.geolocation);
-  console.log(window.history);
-  console.log(navigator.geolocation);
-  let os = navigator.platform;
-  console.log(os); // e.g. "Windows", "MacIntel", "Linux armv7l", etc.
-  let browser = navigator.userAgent;
-  console.log(browser); // e.g. "Mozilla/5.0 (Windows NT 10.0; Win64; x64)
-  // @ts-ignore
-  // let info = platform.parse(navigator.userAgent);
-  // console.log(info.name); // e.g. "Chrome"
-  // console.log(info.version); // e.g. "91.0.4472.124"
-  // console.log(info.os); // e.g. "Windows 10"
-  let screenWidth = window.screen.width;
-  let screenHeight = window.screen.height;
-  console.log(screenWidth + " x " + screenHeight); // e.g. "1920 x 1080"
+  //creating function to load ip address from the API
+  const getData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/')
+    setIP(res.data)
+  }
+
+  useEffect(() => {
+    getData().then(() => console.log(''));
+  }, [])
+
   const userAgent = navigator.userAgent;
-
-
   let deviceType = "Other"
   let OSName = "Unknown OS";
   let OSVersion = "Unknown OS Version";
@@ -246,10 +214,38 @@ const Home: React.FC<propType> = (props) => {
     }
   }
 
-  console.log("Operating System: " + OSName);
-  console.log("Operating System Version: " + OSVersion);
-  console.log("Browser: " + userBrowser);
-  console.log("Device Type: " + deviceType);
+  const resultObj = {
+    cube1LoadTime,
+    cube2LoadTime,
+    Cylinder1LoadTime,
+    Cylinder2LoadTime,
+    pyramid1LoadTime,
+    pyramid2LoadTime,
+    sphere1LoadTime,
+    sphere2LoadTime,
+    ip,
+    OSName,
+    OSVersion,
+    userBrowser,
+    deviceType,
+    screen: {width: window.screen.width, height: window.screen.height},
+    role,
+    serviceProvider,
+    network,
+    ratingForThreeJsPowered,
+    ratingForNonThreeJsPowered,
+    isThreeJsDelayed,
+    isThreeJsNavigable,
+    isNonThreeJsNavigable,
+    isThreeJsLoadingTimeImpact,
+    isNonThreeJsLoadingTimeImpact,
+    recommended3DSite,
+    comparison,
+    isSuitableForChildren,
+    extra,
+    aboutYou
+  }
+
   return (
     <div className="feedback-div">
       <div className="notice">
@@ -280,12 +276,12 @@ const Home: React.FC<propType> = (props) => {
       <div className="wrapper-options">
         <span>ThreeJs Powered &nbsp;</span>
         <CreatableSelect className="non-full-width" isClearable options={booleanOptions}
-                         onChange={(e: any) => setIsThreeJsNavigatable(e.value)}/>
+                         onChange={(e: any) => setIsThreeJsNavigable(e.value)}/>
       </div>
       <div className="wrapper-options">
         <span>Non ThreeJs Powered &nbsp;</span>
         <CreatableSelect className="non-full-width" isClearable options={booleanOptions}
-                         onChange={(e: any) => setIsNonThreeJsNavigatable(e.value)}/>
+                         onChange={(e: any) => setIsNonThreeJsNavigable(e.value)}/>
       </div>
       <div className="label">{translate("question8", language)}</div>
       <div className="wrapper-options">
@@ -313,7 +309,16 @@ const Home: React.FC<propType> = (props) => {
         <button disabled={isDisabled} className="feedback-btn" onClick={() => console.log(resultObj)}> Submit</button>
         {
           isDisabled &&
-            <small>{translate("disabledError", language)}</small>
+            <small>{translate("disabledError", language)}<br/>
+              {cube1LoadTime === null ? <><Link to="../cube">Cube 1,</Link>&nbsp;</> : ''}
+              {cube2LoadTime === null ? <><Link to="../cube-2">Cube 2,</Link>&nbsp;</> : ''}
+              {Cylinder1LoadTime === null ? <><Link to="../cylinder">Cylinder 1,</Link>&nbsp;</> : ''}
+              {Cylinder2LoadTime === null ? <><Link to="../cylinder-2">Cylinder 2,</Link>&nbsp;</> : ''}
+              {pyramid1LoadTime === null ? <><Link to="../pyramid">Pyramid 1,</Link>&nbsp;</> : ''}
+              {pyramid2LoadTime === null ? <><Link to="../pyramid-2">Pyramid 2,</Link>&nbsp;</> : ''}
+              {sphere1LoadTime === null ? <><Link to="../sphere">Sphere 1,</Link>&nbsp;</> : ''}
+              {sphere2LoadTime === null ? <><Link to="../sphere-2">Sphere 2,</Link>&nbsp;</> : ''}
+            </small>
         }
       </div>
 

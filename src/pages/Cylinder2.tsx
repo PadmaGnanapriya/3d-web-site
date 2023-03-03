@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./cylinder2.scss"
 import {translate} from "../it8n";
+import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -21,7 +22,7 @@ const Page: React.FC<propType> = (props) => {
 
   return (
     <>
-      <h1>{translate("cylinder", language)} 2</h1>
+      <h1>{translate("cylinder", language)} 2 <span>(Non ThreeJs Powered)</span></h1>
       <div className="holder"
            onDrag={(e) => {
              console.log(e.clientX, e.clientY);
@@ -37,10 +38,11 @@ const Page: React.FC<propType> = (props) => {
         <div className="cylinder">
           {
             Array.from(Array(50).keys()).map((element) =>
-                <div className="face" style={{transform: `rotateY(${360 / 50 * element}deg) translateZ(${35/3.14159265358979}vw)`}}/>)
+                <div key={element} className="face" style={{transform: `rotateY(${360 / 50 * element}deg) translateZ(${35/3.14159265358979}vw)`}}/>)
           }
         </div>
       </div>
+      <Link className="next-link" to="../sphere"><button>Next &rarr;</button></Link>
     </>
   )
 }

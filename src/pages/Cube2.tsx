@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./cube2.scss";
 import {translate} from "../it8n";
+import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -21,7 +22,7 @@ const Cube2: React.FC<propType> = (props) => {
 
   return (
     <>
-      <h1>{translate("cube", language)} 2</h1>
+      <h1>{translate("cube", language)} 2 <span>(Non ThreeJs Powered)</span></h1>
       <div id="cube-2"
            onDrag={(e) => {
              console.log(e.clientX, e.clientY);
@@ -45,6 +46,7 @@ const Cube2: React.FC<propType> = (props) => {
         <div style={{WebkitTransform: `rotateX(270deg) rotateY(0deg) translateZ(63px)`}}/>
         <div style={{WebkitTransform: `rotateX(90deg) translateZ(63px)`}}/>
       </div>
+      <Link className="next-link" to="../cylinder"><button>Next &rarr;</button></Link>
     </>
   )
 }
