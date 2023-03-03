@@ -25,7 +25,6 @@ const Page: React.FC<propType> = (props) => {
       <h1>{translate("cylinder", language)} 2 <span>(Non ThreeJs Powered)</span></h1>
       <div className="holder"
            onDrag={(e) => {
-             console.log(e.clientX, e.clientY);
              if (e.clientX !== 0) {
                setYValue(e.clientX)
              }

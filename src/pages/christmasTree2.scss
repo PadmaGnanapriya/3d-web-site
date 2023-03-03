@@ -1,0 +1,177 @@
+$christmas-tree-green-1: #057007;
+$christmas-tree-green-2: #044605;
+$christmas-tree-green-3: #0b3f0c;
+$christmas-tree-green-4: #063307;
+$christmas-tree-ornament-1: #ffba08;
+$christmas-tree-ornament-2: #1587e5;
+$christmas-tree-ornament-3: #ffffff;
+$christmas-tree-ornament-4: #f10810;
+$christmas-tree-star: yellow;
+
+.gradient-bg {
+  background: linear-gradient(0deg,rgba(255, 255, 255, 0) 0%,  rgba(0, 0, 0, 0.3) 40%, rgba(255, 255, 255, 0) 100%);
+
+  .parent-tree-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    margin: 0;
+
+    .christmas-tree-container {
+      perspective: 400px;
+      position: relative;
+
+      .glow {
+        position: absolute;
+        top: -40px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle at center, white, transparent 50px);
+        animation: christmas-tree-glow 5s infinite linear;
+      }
+
+      .shadow {
+        position: absolute;
+        top: 225px;
+        left: -20px;
+        width: 140px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+.christmas-tree {
+  position: relative;
+  margin-top: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  transform-style: preserve-3d;
+  animation: christmas-tree-rotate 10s infinite linear;
+}
+
+.christmas-tree .branches,
+.christmas-tree .ornaments,
+.christmas-tree .tree-top {
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.christmas-tree .branch {
+  position: absolute;
+  border-radius: 5px;
+  background-color: $christmas-tree-green-1;
+  transform-origin: center center;
+}
+
+.christmas-tree .branch:nth-child(3n + 2) {
+  background-color: $christmas-tree-green-2;
+}
+
+.christmas-tree .branch:nth-child(3n + 1) {
+  background-color: $christmas-tree-green-3;
+}
+
+.christmas-tree .branch:nth-child(4n + 2) {
+  background-color: $christmas-tree-green-4;
+}
+
+.christmas-tree .ornament {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $christmas-tree-ornament-1;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  animation: flicker 3s linear infinite;
+}
+
+.christmas-tree .ornament:nth-child(4n + 0) {
+  background-color: $christmas-tree-ornament-2;
+  animation: flicker 5s linear infinite;
+}
+
+.christmas-tree .ornament:nth-child(4n + 1) {
+  background-color: $christmas-tree-ornament-3;
+  animation: flicker 4s linear infinite;
+}
+
+.christmas-tree .ornament:nth-child(4n + 2) {
+  background-color: $christmas-tree-ornament-4;
+  animation: flicker 3s linear infinite;
+}
+
+.christmas-tree .star {
+  transform-style: preserve-3d;
+  transform: translateZ(225px) translateY(-4px) rotateX(-90deg);
+}
+
+.christmas-tree .star,
+.christmas-tree .star:before,
+.christmas-tree .star:after {
+  position: absolute;
+  content: '';
+  height: 0;
+  width: 0;
+  border-top: solid 10px $christmas-tree-star;
+  border-left: solid 15px transparent;
+  border-right: solid 15px transparent;
+  top: 0;
+  left: calc(50% - 15px);
+  animation: flicker 12s linear infinite;
+}
+
+.christmas-tree .star:before {
+  transform: rotate(72deg);
+  top: -11px;
+  left: -15px;
+}
+
+.christmas-tree .star:after {
+  transform: rotate(287deg);
+  top: -11px;
+  left: -15px;
+}
+
+@keyframes christmas-tree-rotate {
+  0% {
+    transform: rotateX(60deg) rotateZ(0);
+  }
+  99.99999% {
+    transform: rotateX(60deg) rotateZ(360deg);
+  }
+}
+
+@keyframes christmas-tree-glow {
+  0% {
+    transform: scale(1.1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.15;
+  }
+}
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    //text-shadow: none;
+    opacity: .99;
+
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+  }
+}

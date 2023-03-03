@@ -39,6 +39,12 @@ const Home: React.FC<propType> = (props) => {
       <Link to="/pyramid-2">
         <div className="card">{translate("pyramid", language)} 2</div>
       </Link>
+      <Link to="/christmas-tree">
+        <div className="card">{translate("christmasTree", language)} 1</div>
+      </Link>
+      <Link to="/christmas-tree-2">
+        <div className="card">{translate("christmasTree", language)} 2</div>
+      </Link>
 
       {/*<div className="card" onClick={() => navigate('/cube')}>{translate("cube", language)} 1</div>*/}
       {/*<div className="card" onClick={() => navigate('/cube-2')}>{translate("cube", language)} 2</div>*/}

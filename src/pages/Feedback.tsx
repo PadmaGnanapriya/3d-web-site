@@ -21,6 +21,8 @@ const Home: React.FC<propType> = (props) => {
   const pyramid2LoadTime = sessionStorage.getItem('Pyramid2');
   const sphere1LoadTime = sessionStorage.getItem('Sphere1');
   const sphere2LoadTime = sessionStorage.getItem('Sphere2');
+  const christmasTree1LoadTime = sessionStorage.getItem('ChristmasTree1');
+  const christmasTree2LoadTime = sessionStorage.getItem('ChristmasTree2');
 
   const isDisabled = !(cube1LoadTime && cube2LoadTime && Cylinder1LoadTime && Cylinder2LoadTime &&
     pyramid1LoadTime && pyramid2LoadTime && sphere1LoadTime && sphere2LoadTime)
@@ -213,6 +215,14 @@ const Home: React.FC<propType> = (props) => {
       OSVersion = "Mint";
     }
   }
+  const cores = navigator.hardwareConcurrency;
+  console.log(`Number of CPU cores: ${cores}`);
+
+  console.log(navigator);
+  console.log(navigator.maxTouchPoints);
+  //
+  // const memory = navigator.deviceMemory;
+  // console.log(`Memory available: ${memory} GB`);
 
   const resultObj = {
     cube1LoadTime,
@@ -223,12 +233,15 @@ const Home: React.FC<propType> = (props) => {
     pyramid2LoadTime,
     sphere1LoadTime,
     sphere2LoadTime,
+    christmasTree1LoadTime,
+    christmasTree2LoadTime,
     ip,
     OSName,
     OSVersion,
     userBrowser,
     deviceType,
     screen: {width: window.screen.width, height: window.screen.height},
+
     role,
     serviceProvider,
     network,
@@ -318,6 +331,8 @@ const Home: React.FC<propType> = (props) => {
               {pyramid2LoadTime === null ? <><Link to="../pyramid-2">Pyramid 2,</Link>&nbsp;</> : ''}
               {sphere1LoadTime === null ? <><Link to="../sphere">Sphere 1,</Link>&nbsp;</> : ''}
               {sphere2LoadTime === null ? <><Link to="../sphere-2">Sphere 2,</Link>&nbsp;</> : ''}
+              {christmasTree1LoadTime === null ? <><Link to="../christmas-tree-1">Christmas Tree 1,</Link>&nbsp;</> : ''}
+              {christmasTree2LoadTime === null ? <><Link to="../christmas-tree-2">Christmas Tree 2,</Link>&nbsp;</> : ''}
             </small>
         }
       </div>

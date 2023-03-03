@@ -46,7 +46,7 @@ const Cube2: React.FC<propType> = (props) => {
         <div style={{WebkitTransform: `rotateX(270deg) rotateY(0deg) translateZ(-15px)`}}/>
       </div>
       {/* TODO : Create complex image page and point to it */}
-      <Link className="next-link" to="../feedback"><button>Next &rarr;</button></Link>
+      <Link className="next-link" to="../christmas-tree"><button>Next &rarr;</button></Link>
     </>
   )
 }
