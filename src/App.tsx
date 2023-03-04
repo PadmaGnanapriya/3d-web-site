@@ -1,6 +1,7 @@
 import React, {Suspense, useEffect, useState} from 'react';
 import './App.scss';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import loadingImg from "./loading.webp"
 
 const Cube1 = React.lazy(() => import("./pages/Cube1"));
 const Cube2 = React.lazy(() => import("./pages/Cube2"));
@@ -33,6 +34,17 @@ function App() {
     }
   }, [])
 
+  const loadingPage = () => {
+    return (
+      <>
+        <br/>
+        <br/>
+        <img src={loadingImg}/>
+        <h2>Loading ...</h2>
+      </>
+    )
+  }
+
   return (
     <div className="App" style={{background: '#bdc3c7', minHeight: '100vh'}}>
       <div className="header">
@@ -46,7 +58,7 @@ function App() {
         </select>
       </div>
       <div className="bottom-div">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={loadingPage()}>
           <BrowserRouter>
             <Routes>
               <Route path='/cube' element={<Cube1 language={language}/>}/>

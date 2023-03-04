@@ -68,6 +68,9 @@
     &:focus {
       outline: 2px solid #2684ff
     }
+  }
 
+  .invalid-input {
+    outline: 1.6px red solid;
   }
 }

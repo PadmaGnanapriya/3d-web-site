@@ -3,13 +3,15 @@ import {translate} from "../it8n";
 import CreatableSelect from 'react-select/creatable';
 import "./feedback.scss";
 import axios from "axios";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 type propType = {
   language: string;
 }
 
 const Home: React.FC<propType> = (props) => {
+  const navigate = useNavigate();
+
   const {language} = props;
   const cube1LoadTime = sessionStorage.getItem('Cube1');
   const cube2LoadTime = sessionStorage.getItem('Cube2');
@@ -25,9 +27,9 @@ const Home: React.FC<propType> = (props) => {
   const isDisabled = !(cube1LoadTime && cube2LoadTime && Cylinder1LoadTime && Cylinder2LoadTime &&
     pyramid1LoadTime && pyramid2LoadTime && sphere1LoadTime && sphere2LoadTime)
 
+  const [validating, setValidating] = useState(false);
   const [ip, setIP] = useState('');
   const [role, setRole] = useState<string | null>('');
-  const [serviceProvider, setServiceProvider] = useState<string | null>('');
   const [network, setNetwork] = useState<string | null>('');
   const [ratingForThreeJsPowered, setRatingForThreeJsPowered] = useState<string | null>('');
   const [ratingForNonThreeJsPowered, setRatingForNonThreeJsPowered] = useState<string | null>('');
@@ -54,23 +56,23 @@ const Home: React.FC<propType> = (props) => {
     {value: 'software Engineer', label: 'software Engineer'},
     {value: 'other', label: 'other'},
   ]
-  const networkOptions = [
-    {value: 'Sri Lanka Telecom', label: translate("SriLankaTelecom", language)},
-    {value: 'Mobitel', label: translate("Mobitel", language)},
-    {value: 'Dialog', label: translate("Dialog", language)},
-    {value: 'Hutch', label: translate("Hutch", language)},
-    {value: 'Airtel', label: translate("Airtel", language)},
-    {value: 'Etisalat', label: translate("Etisalat", language)},
-    {value: 'Lanka Bell', label: translate("LankaBell", language)},
-  ];
+  // const networkOptions = [
+  //   {value: 'Sri Lanka Telecom', label: translate("SriLankaTelecom", language)},
+  //   {value: 'Mobitel', label: translate("Mobitel", language)},
+  //   {value: 'Dialog', label: translate("Dialog", language)},
+  //   {value: 'Hutch', label: translate("Hutch", language)},
+  //   {value: 'Airtel', label: translate("Airtel", language)},
+  //   {value: 'Etisalat', label: translate("Etisalat", language)},
+  //   {value: 'Lanka Bell', label: translate("LankaBell", language)},
+  // ];
   const networkTypes = [
-    {value: 'Slow 3G', label: 'Slow 3G'},
-    {value: 'Fast 3G', label: 'Fast 3G'},
-    {value: 'Mobile 4G', label: 'Mobile 4G'},
+    {value: '5G', label: '5G'},
+    {value: 'Fiber optic internet', label: 'Fiber optic internet'},
     {value: '4G LTE (Wireless Router)', label: '4G LTE (Wireless Router)'},
     {value: 'ADSL (Asymmetric Digital Subscriber Line)', label: 'ADSL (Asymmetric Digital Subscriber Line)'},
-    {value: 'Fiber optic internet', label: 'Fiber optic internet'},
-    {value: '5G', label: '5G'},
+    {value: 'Mobile 4G', label: 'Mobile 4G'},
+    {value: 'Fast 3G', label: 'Fast 3G'},
+    {value: 'Slow 3G', label: 'Slow 3G'},
   ]
   const ratingOptions = [
     {value: '1', label: '1'},
@@ -234,7 +236,6 @@ const Home: React.FC<propType> = (props) => {
     maxTouchPoints: navigator.maxTouchPoints,
     cores: navigator.hardwareConcurrency,
     role,
-    serviceProvider,
     network,
     ratingForThreeJsPowered,
     ratingForNonThreeJsPowered,
@@ -250,7 +251,29 @@ const Home: React.FC<propType> = (props) => {
     aboutYou
   }
 
-  // TODO disable until process
+  const onSubmitForm = async () => {
+    setValidating(true);
+    if (
+      role === '' ||
+      network === '' ||
+      ratingForThreeJsPowered === '' ||
+      ratingForNonThreeJsPowered === '' ||
+      isThreeJsDelayed === '' ||
+      isThreeJsNavigable === '' ||
+      isNonThreeJsNavigable === '' ||
+      isThreeJsLoadingTimeImpact === '' ||
+      isNonThreeJsLoadingTimeImpact === '' ||
+      recommended3DSite === '' ||
+      comparison === '' ||
+      isSuitableForChildren === ''
+    ) {
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      return
+    }
+    await axios.post('https://script.google.com/macros/library/d/1OLgUWveL1zm9ax4qXikPPfdgdhzGdPl8P99CXNtbEteXdKNPLVRwp8TP/2', resultObj)
+    alert(translate("thanksSubmission", language));
+    navigate("/");
+  }
 
   return (
     <div className="feedback-div">
@@ -259,60 +282,80 @@ const Home: React.FC<propType> = (props) => {
       </div>
 
       <div className="label">{translate("question1", language)}</div>
-      <CreatableSelect isClearable options={roles}
+      <CreatableSelect isClearable options={roles} className={validating && role === '' ? "invalid-input" : ""}
                        onChange={(e: any) => setRole(e.value)}/>
-      <div className="label">{translate("question2", language)}</div>
-      <CreatableSelect isClearable options={networkOptions} onChange={(e: any) => setServiceProvider(e.value)}/>
+      {/*<div className="label">{translate("question2", language)}</div>*/}
+      {/*<CreatableSelect isClearable options={networkOptions} onChange={(e: any) => setServiceProvider(e.value)}/>*/}
       <div className="label">{translate("question3", language)}</div>
-      <CreatableSelect isClearable options={networkTypes} onChange={(e: any) => setNetwork(e.value)}/>
+      <CreatableSelect className={validating && network === '' ? "invalid-input" : ""} isClearable
+                       options={networkTypes} onChange={(e: any) => setNetwork(e.value)}/>
       <div className="label">{translate("question4", language)}</div>
       <div className="wrapper-options">
         <span>ThreeJs Powered &nbsp;</span>
-        <CreatableSelect className="non-full-width" isClearable options={ratingOptions}
-                         onChange={(e: any) => setRatingForThreeJsPowered(e.value)}/>
+        <CreatableSelect
+          className={validating && ratingForThreeJsPowered === '' ? "invalid-input non-full-width" : "non-full-width"}
+          isClearable options={ratingOptions}
+          onChange={(e: any) => setRatingForThreeJsPowered(e.value)}/>
       </div>
       <div className="wrapper-options">
         <span>Non ThreeJs Powered &nbsp;</span>
-        <CreatableSelect className="non-full-width" isClearable options={ratingOptions}
-                         onChange={(e: any) => setRatingForNonThreeJsPowered(e.value)}/>
+        <CreatableSelect
+          className={validating && ratingForNonThreeJsPowered === '' ? "invalid-input non-full-width" : "non-full-width"}
+          isClearable options={ratingOptions}
+          onChange={(e: any) => setRatingForNonThreeJsPowered(e.value)}/>
       </div>
       <div className="label">{translate("question5", language)}</div>
-      <CreatableSelect isClearable options={booleanOptions} onChange={(e: any) => setIsThreeJsDelayed(e.value)}/>
+      <CreatableSelect className={validating && isThreeJsDelayed === '' ? "invalid-input" : ""} isClearable
+                       options={booleanOptions} onChange={(e: any) => setIsThreeJsDelayed(e.value)}/>
       <div className="label">{translate("question6", language)}</div>
       <div className="wrapper-options">
         <span>ThreeJs Powered &nbsp;</span>
-        <CreatableSelect className="non-full-width" isClearable options={booleanOptions}
-                         onChange={(e: any) => setIsThreeJsNavigable(e.value)}/>
+        <CreatableSelect
+          className={validating && isThreeJsNavigable === '' ? "invalid-input non-full-width" : "non-full-width"}
+          isClearable options={booleanOptions}
+          onChange={(e: any) => setIsThreeJsNavigable(e.value)}/>
       </div>
       <div className="wrapper-options">
         <span>Non ThreeJs Powered &nbsp;</span>
-        <CreatableSelect className="non-full-width" isClearable options={booleanOptions}
-                         onChange={(e: any) => setIsNonThreeJsNavigable(e.value)}/>
+        <CreatableSelect
+          className={validating && isNonThreeJsNavigable === '' ? "invalid-input non-full-width" : "non-full-width"}
+          isClearable options={booleanOptions}
+          onChange={(e: any) => setIsNonThreeJsNavigable(e.value)}/>
       </div>
       <div className="label">{translate("question8", language)}</div>
       <div className="wrapper-options">
         <span>ThreeJs Powered &nbsp;</span>
-        <CreatableSelect className="non-full-width" isClearable options={booleanOptions}
-                         onChange={(e: any) => setIsThreeJsLoadingTimeImpact(e.value)}/>
+        <CreatableSelect
+          className={validating && isThreeJsLoadingTimeImpact === '' ? "invalid-input non-full-width" : "non-full-width"}
+          isClearable options={booleanOptions}
+          onChange={(e: any) => setIsThreeJsLoadingTimeImpact(e.value)}/>
       </div>
       <div className="wrapper-options">
         <span>Non ThreeJs Powered &nbsp;</span>
-        <CreatableSelect className="non-full-width" isClearable options={booleanOptions}
-                         onChange={(e: any) => setIsNonThreeJsLoadingTimeImpact(e.value)}/>
+        <CreatableSelect
+          className={validating && isNonThreeJsLoadingTimeImpact === '' ? "invalid-input non-full-width" : "non-full-width"}
+          isClearable options={booleanOptions}
+          onChange={(e: any) => setIsNonThreeJsLoadingTimeImpact(e.value)}/>
       </div>
       <div className="label">{translate("question9", language)}</div>
-      <CreatableSelect isClearable options={threeDType} onChange={(e: any) => setRecommended3DSite(e.value)}/>
+      <CreatableSelect className={validating && recommended3DSite === '' ? "invalid-input" : ""} isClearable
+                       options={threeDType} onChange={(e: any) => setRecommended3DSite(e.value)}/>
       <div className="label">{translate("question10", language)}</div>
-      <textarea rows={4} onChange={(e: any) => setComparison(e.target.value)}/>
+      {language !== 'EN' && <small>( Please provide your answer in English, if possible. )</small>}
+      <textarea className={validating && comparison === '' ? "invalid-input" : ""} rows={4}
+                onChange={(e: any) => setComparison(e.target.value)}/>
       <div className="label">{translate("question11", language)}</div>
-      <CreatableSelect isClearable options={booleanOptions} onChange={(e: any) => setIsSuitableForChildren(e.value)}/>
+      <CreatableSelect className={validating && isSuitableForChildren === '' ? "invalid-input" : ""} isClearable
+                       options={booleanOptions} onChange={(e: any) => setIsSuitableForChildren(e.value)}/>
       <div className="label">{translate("question12", language)}</div>
+      {language !== 'EN' && <small>( Please provide your answer in English, if possible. )</small>}
       <textarea rows={4} onChange={(e: any) => setExtra(e.target.value)}/>
       <div className="label">{translate("question13", language)} (Optional)</div>
+      {language !== 'EN' && <small>( Please provide your answer in English, if possible. )</small>}
       <textarea rows={5} onChange={(e: any) => setAboutYou(e.target.value)} placeholder={aboutPlaceHolder}/>
 
       <div className="text-align-center">
-        <button disabled={isDisabled} className="feedback-btn" onClick={() => console.log(resultObj)}> Submit</button>
+        <button disabled={isDisabled} className="feedback-btn" onClick={onSubmitForm}> Submit</button>
         {
           isDisabled &&
             <small>{translate("disabledError", language)}<br/>
