@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {Canvas} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import {translate} from "../it8n";
-import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -20,7 +19,7 @@ const Cube1: React.FC<propType> = (props) => {
 
   const Box = () => {
     return (
-      <mesh scale={[2, 2, 2]} rotation={[0.5, 0.5, 0]}>
+      <mesh scale={[2, 2, 2]} rotation={[.5, 0.5, 0]}>
         <boxBufferGeometry attach="geometry"/>
         <meshPhongMaterial attach="material" color="#2c3e50"/>
       </mesh>
@@ -36,7 +35,9 @@ const Cube1: React.FC<propType> = (props) => {
         <directionalLight color="#ffffff" intensity={1} position={[-1, 2, 4]}/>
         <Box/>
       </Canvas>
-      <Link className="next-link" to="../cube-2"><button>Next &rarr;</button></Link>
+      <a className="next-link" href="/cube-2">
+        <button>Next &rarr;</button>
+      </a>
     </>
   )
 }

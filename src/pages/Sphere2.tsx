@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import "./sphere2.scss"
 import {translate} from "../it8n";
-import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -25,7 +24,9 @@ const Page: React.FC<propType> = (props) => {
       >
         <figure className="ball"><span className="shadow"/></figure>
       </section>
-      <Link className="next-link" to="../pyramid"><button>Next &rarr;</button></Link>
+      <a className="next-link" href="/pyramid">
+        <button>Next &rarr;</button>
+      </a>
     </>
   )
 }

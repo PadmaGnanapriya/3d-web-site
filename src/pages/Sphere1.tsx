@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {Canvas} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import {translate} from "../it8n";
-import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -36,7 +35,9 @@ const Sphere1: React.FC<propType> = (props) => {
         <spotLight position={[10, 15, 10]} angle={0.3}/>
         <Sphere/>
       </Canvas>
-      <Link className="next-link" to="../sphere-2"><button>Next &rarr;</button></Link>
+      <a className="next-link" href="/sphere-2">
+        <button>Next &rarr;</button>
+      </a>
     </>
   )
 }

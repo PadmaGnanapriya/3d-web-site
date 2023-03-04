@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./pyramid2.scss";
 import {translate} from "../it8n";
-import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -17,23 +16,45 @@ const Cube2: React.FC<propType> = (props) => {
     }
   }, []);
 
-  const [xValue, setXValue] = useState(-20);
-  const [yValue, setYValue] = useState(100);
+  const [dragEndX, setDragEndX] = useState(-20);
+  const [dragEndY, setDragEndY] = useState(100);
+  const [touching, setTouching] = useState(false);
+
+  function handleTouchStart(event: any) {
+    setTouching(true);
+  }
+
+  function handleTouchMove(event: any) {
+    if (!touching) {
+      return;
+    }
+    const touch = event.touches[0];
+    setDragEndX(touch.clientX);
+    setDragEndY(touch.clientY);
+  }
+
+  function handleTouchEnd() {
+    setTouching(false);
+  }
+
+  function handleMouseMove(event: any) {
+    if (!event.buttons) {
+      return;
+    }
+    setDragEndX(event.clientX);
+    setDragEndY(event.clientY);
+  }
+
 
   return (
     <>
       <h1>{translate("pyramid", language)} 2 <span>(Non ThreeJs Powered)</span></h1>
       <div id="pyramid-2"
-           onDrag={(e) => {
-             console.log(e.clientX, e.clientY);
-             if (e.clientX !== 0) {
-               setYValue(e.clientX)
-             }
-             if (e.clientY !== 0) {
-               setXValue(e.clientY);
-             }
-           }}
-           style={{transform: `rotateX(${xValue}deg) rotateY(${yValue}deg)`}}
+           onTouchStart={handleTouchStart}
+           onTouchMove={handleTouchMove}
+           onTouchEnd={handleTouchEnd}
+           onMouseMove={handleMouseMove}
+           style={{transform: `rotateX(${dragEndX}deg) rotateY(${dragEndY}deg)`}}
       >
         {
           [0, 1, 2, 3].map((element) =>
@@ -45,8 +66,9 @@ const Cube2: React.FC<propType> = (props) => {
         }
         <div style={{WebkitTransform: `rotateX(270deg) rotateY(0deg) translateZ(-15px)`}}/>
       </div>
-      {/* TODO : Create complex image page and point to it */}
-      <Link className="next-link" to="../christmas-tree"><button>Next &rarr;</button></Link>
+      <a className="next-link" href="/christmas-tree">
+        <button>Next &rarr;</button>
+      </a>
     </>
   )
 }

@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import {Canvas} from '@react-three/fiber';
+import {OrbitControls} from '@react-three/drei';
 import {translate} from "../it8n";
-import {Link} from "react-router-dom";
 
 type propType = {
   language: string;
@@ -20,9 +19,9 @@ const Cone1: React.FC<propType> = (props) => {
 
   const Cone = () => {
     return (
-      <mesh scale={[1.1,1, 1.1]} rotation={[0.5, 0.5, 0]}>
-        <cylinderGeometry attach="geometry" args={[0,1.5,2,4,1]}/>
-        <meshLambertMaterial attach="material" color="#2c3e50" />
+      <mesh scale={[1.1, 1, 1.1]} rotation={[0.5, 0.5, 0]}>
+        <cylinderGeometry attach="geometry" args={[0, 1.5, 2, 4, 1]}/>
+        <meshLambertMaterial attach="material" color="#2c3e50"/>
       </mesh>
     )
   }
@@ -31,12 +30,14 @@ const Cone1: React.FC<propType> = (props) => {
     <>
       <h1>{translate("pyramid", language)} 1 <span>(ThreeJs Powered)</span></h1>
       <Canvas style={{height: '85vh'}}>
-        <OrbitControls />
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10,15,10]} angle={0.3} />
+        <OrbitControls/>
+        <ambientLight intensity={0.5}/>
+        <spotLight position={[10, 15, 10]} angle={0.3}/>
         <Cone/>
       </Canvas>
-      <Link className="next-link" to="../pyramid-2"><button>Next &rarr;</button></Link>
+      <a className="next-link" href="/pyramid-2">
+        <button>Next &rarr;</button>
+      </a>
     </>
   )
 }

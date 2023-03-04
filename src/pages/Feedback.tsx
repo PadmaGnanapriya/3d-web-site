@@ -5,14 +5,12 @@ import "./feedback.scss";
 import axios from "axios";
 import {Link} from 'react-router-dom';
 
-
 type propType = {
   language: string;
 }
 
 const Home: React.FC<propType> = (props) => {
   const {language} = props;
-
   const cube1LoadTime = sessionStorage.getItem('Cube1');
   const cube2LoadTime = sessionStorage.getItem('Cube2');
   const Cylinder1LoadTime = sessionStorage.getItem('Cylinder1');
@@ -252,6 +250,8 @@ const Home: React.FC<propType> = (props) => {
     aboutYou
   }
 
+  // TODO disable until process
+
   return (
     <div className="feedback-div">
       <div className="notice">
@@ -324,8 +324,10 @@ const Home: React.FC<propType> = (props) => {
               {pyramid2LoadTime === null ? <><Link to="../pyramid-2">Pyramid 2,</Link>&nbsp;</> : ''}
               {sphere1LoadTime === null ? <><Link to="../sphere">Sphere 1,</Link>&nbsp;</> : ''}
               {sphere2LoadTime === null ? <><Link to="../sphere-2">Sphere 2,</Link>&nbsp;</> : ''}
-              {christmasTree1LoadTime === null ? <><Link to="../christmas-tree-1">Christmas Tree 1,</Link>&nbsp;</> : ''}
-              {christmasTree2LoadTime === null ? <><Link to="../christmas-tree-2">Christmas Tree 2,</Link>&nbsp;</> : ''}
+              {christmasTree1LoadTime === null ? <><Link to="../christmas-tree-1">Christmas Tree
+                1,</Link>&nbsp;</> : ''}
+              {christmasTree2LoadTime === null ? <><Link to="../christmas-tree-2">Christmas Tree
+                2,</Link>&nbsp;</> : ''}
             </small>
         }
       </div>
