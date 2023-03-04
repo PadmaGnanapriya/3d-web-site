@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Canvas} from '@react-three/fiber';
 import {translate} from "../it8n";
 import {Link} from "react-router-dom";
@@ -10,6 +10,13 @@ type propType = {
 
 const ChristmasTree1: React.FC<propType> = (props) => {
   const {language} = props;
+
+  useEffect(() => {
+    const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    if (sessionStorage.getItem('ChristmasTree1') === null) {
+      sessionStorage.setItem('ChristmasTree1', String(loadTime))
+    }
+  }, []);
 
   const GLBModel = () => {
     const glbRef = useRef<any>();

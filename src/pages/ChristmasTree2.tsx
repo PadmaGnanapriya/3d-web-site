@@ -51,7 +51,7 @@ const ChristmasTree2: React.FC<propType> = (props) => {
               Array.from(Array(40).keys()).map((element) => {
                   let pos = 10 + Math.random() * 90;
                   return (
-                    <div className="ornament"
+                    <div className="ornament" key={element}
                          style={{transform: `rotateZ(${element % 6 * 60 + Math.random() * 60}deg) translateX(${60 - pos / 2}px) translateZ(${pos * 2}px) rotateY(75deg)`}}/>
                   )
                 }
@@ -61,7 +61,7 @@ const ChristmasTree2: React.FC<propType> = (props) => {
           <div className="tree-top">
             {
               Array.from(Array(10).keys()).map((element) =>
-                <div className="star"
+                <div className="star" key={element}
                      style={{transform: `translateZ(225px) translateY(${-4 - (element / 4)}px) rotateX(-90deg)`}}/>
               )
             }

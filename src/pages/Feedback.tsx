@@ -215,14 +215,6 @@ const Home: React.FC<propType> = (props) => {
       OSVersion = "Mint";
     }
   }
-  const cores = navigator.hardwareConcurrency;
-  console.log(`Number of CPU cores: ${cores}`);
-
-  console.log(navigator);
-  console.log(navigator.maxTouchPoints);
-  //
-  // const memory = navigator.deviceMemory;
-  // console.log(`Memory available: ${memory} GB`);
 
   const resultObj = {
     cube1LoadTime,
@@ -241,7 +233,8 @@ const Home: React.FC<propType> = (props) => {
     userBrowser,
     deviceType,
     screen: {width: window.screen.width, height: window.screen.height},
-
+    maxTouchPoints: navigator.maxTouchPoints,
+    cores: navigator.hardwareConcurrency,
     role,
     serviceProvider,
     network,
