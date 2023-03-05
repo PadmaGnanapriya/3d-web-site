@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {Canvas} from '@react-three/fiber';
+import {Canvas, useFrame} from '@react-three/fiber';
 import {translate} from "../it8n";
 import {OrbitControls, useGLTF} from "@react-three/drei";
 
@@ -21,6 +21,10 @@ const ChristmasTree1: React.FC<propType> = (props) => {
     const glbRef = useRef<any>();
     // @ts-ignore
     const {nodes} = useGLTF("/christmas_tree.glb");
+
+    useFrame(() => {
+      glbRef.current.rotation.z += 0.01
+    })
 
     return (
       <mesh ref={glbRef} scale={0.2}>

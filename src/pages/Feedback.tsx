@@ -45,16 +45,16 @@ const Home: React.FC<propType> = (props) => {
   const [aboutYou, setAboutYou] = useState<string | null>('');
 
   const roles = [
-    {value: 'School Teacher', label: 'School Teacher'},
-    {value: 'tuition Teacher', label: 'tuition Teacher'},
-    {value: 'parent', label: 'parent'},
-    {value: 'Student', label: 'Student'},
-    {value: 'professor', label: 'professor'},
-    {value: 'School administrator or principal', label: 'School administrator or principal'},
-    {value: 'Education policy maker', label: 'Education policy maker'},
-    {value: 'Education consultant or expert', label: 'Education consultant or experts'},
-    {value: 'software Engineer', label: 'software Engineer'},
-    {value: 'other', label: 'other'},
+    {value: 'School Teacher', label: translate('SchoolTeacher', language)},
+    {value: 'tuition Teacher', label: translate('tuitionTeacher', language)},
+    {value: 'parent', label: translate('parent', language)},
+    {value: 'Student', label: translate('Student', language)},
+    {value: 'professor', label: translate('professor', language)},
+    {value: 'School administrator or principal', label:translate('SchoolAdministrator', language)},
+    {value: 'Education policy maker', label:translate('EducationPolicyMaker', language)},
+    {value: 'Education consultant or expert', label: translate('EducationConsultant', language)},
+    {value: 'software Engineer', label: translate('softwareEngineer', language)},
+    {value: 'other', label: translate('other', language)},
   ]
   // const networkOptions = [
   //   {value: 'Sri Lanka Telecom', label: translate("SriLankaTelecom", language)},

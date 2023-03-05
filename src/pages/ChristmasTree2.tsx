@@ -16,22 +16,44 @@ const ChristmasTree2: React.FC<propType> = (props) => {
     }
   }, []);
 
-  const [xValue, setXValue] = useState(-20);
-  const [yValue, setYValue] = useState(10);
+  const [dragEndX, setDragEndX] = useState(-20);
+  const [dragEndY, setDragEndY] = useState(10);
+  const [touching, setTouching] = useState(false);
+
+  function handleTouchStart(event: any) {
+    setTouching(true);
+  }
+
+  function handleTouchMove(event: any) {
+    if (!touching) {
+      return;
+    }
+    const touch = event.touches[0];
+    setDragEndX(touch.clientX);
+    setDragEndY(touch.clientY);
+  }
+
+  function handleTouchEnd() {
+    setTouching(false);
+  }
+
+  function handleMouseMove(event: any) {
+    if (!event.buttons) {
+      return;
+    }
+    setDragEndX(event.clientX);
+    setDragEndY(event.clientY);
+  }
   return (
     < div className="gradient-bg">
       <h1>{translate("christmasTree", language)} 2 <span>(Non ThreeJs Powered)</span></h1>
       <div className="parent-tree-container">
         <div className="christmas-tree-container"
-             onDrag={(e) => {
-               if (e.clientX !== 0) {
-                 setYValue(e.clientX)
-               }
-               if (e.clientY !== 0) {
-                 setXValue(e.clientY);
-               }
-             }}
-             style={{transform: `rotateX(${xValue}deg) rotateY(${yValue}deg)`}}
+             onTouchStart={handleTouchStart}
+             onTouchMove={handleTouchMove}
+             onTouchEnd={handleTouchEnd}
+             onMouseMove={handleMouseMove}
+             style={{transform: `rotateX(${dragEndX}deg) rotateY(${dragEndY}deg)`}}
         >
           <div className="shadow"/>
           <div className="christmas-tree">
