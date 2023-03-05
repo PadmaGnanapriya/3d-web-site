@@ -67,9 +67,9 @@ const Home: React.FC<propType> = (props) => {
   // ];
   const networkTypes = [
     {value: '5G', label: '5G'},
-    {value: 'Fiber optic internet', label: 'Fiber optic internet'},
-    {value: '4G LTE (Wireless Router)', label: '4G LTE (Wireless Router)'},
-    {value: 'ADSL (Asymmetric Digital Subscriber Line)', label: 'ADSL (Asymmetric Digital Subscriber Line)'},
+    {value: 'Fiber', label: 'Fiber optic internet'},
+    {value: '4G LTE', label: '4G LTE (Wireless Router)'},
+    {value: 'ADSL', label: 'ADSL (Asymmetric Digital Subscriber Line)'},
     {value: 'Mobile 4G', label: 'Mobile 4G'},
     {value: 'Fast 3G', label: 'Fast 3G'},
     {value: 'Slow 3G', label: 'Slow 3G'},
@@ -270,9 +270,45 @@ const Home: React.FC<propType> = (props) => {
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
       return
     }
-    await axios.post('https://script.google.com/macros/library/d/1OLgUWveL1zm9ax4qXikPPfdgdhzGdPl8P99CXNtbEteXdKNPLVRwp8TP/2', resultObj)
-    alert(translate("thanksSubmission", language));
-    navigate("/");
+    const formData = new FormData();
+    formData.append("cube1LoadTime", (cube1LoadTime || '').toString());
+    formData.append("cube2LoadTime", (cube2LoadTime || '').toString());
+    formData.append("Cylinder1LoadTime", (Cylinder1LoadTime || '').toString());
+    formData.append("Cylinder2LoadTime", (Cylinder2LoadTime || '').toString());
+    formData.append("pyramid1LoadTime", (pyramid1LoadTime || '').toString());
+    formData.append("pyramid2LoadTime", (pyramid2LoadTime || '').toString());
+    formData.append("sphere1LoadTime", (sphere1LoadTime || '').toString());
+    formData.append("sphere2LoadTime", (sphere2LoadTime || '').toString());
+    formData.append("christmasTree1LoadTime", (christmasTree1LoadTime || '').toString());
+    formData.append("christmasTree2LoadTime", (christmasTree2LoadTime || '').toString());
+    formData.append("ip", JSON.stringify(ip) || '');
+    formData.append("OSName", OSName || '');
+    formData.append("OSVersion", OSVersion || '');
+    formData.append("userBrowser", userBrowser || '');
+    formData.append("deviceType", deviceType || '');
+    formData.append("screen", JSON.stringify({w: window.screen.width, h: window.screen.height}) || '');
+    formData.append("maxTouchPoints", navigator.maxTouchPoints.toString() || '');
+    formData.append("cores", navigator.hardwareConcurrency.toString() || '');
+    formData.append("role", role || '');
+    formData.append("network", (network || '').toString());
+    formData.append("ratingForThreeJsPowered", ratingForThreeJsPowered || '');
+    formData.append("ratingForNonThreeJsPowered", ratingForNonThreeJsPowered || '');
+    formData.append("isThreeJsDelayed", isThreeJsDelayed || '');
+    formData.append("isThreeJsNavigable", isThreeJsNavigable || '');
+    formData.append("isNonThreeJsNavigable", isNonThreeJsNavigable || '');
+    formData.append("isThreeJsLoadingTimeImpact", isThreeJsLoadingTimeImpact || '');
+    formData.append("isNonThreeJsLoadingTimeImpact", isNonThreeJsLoadingTimeImpact || '');
+    formData.append("recommended3DSite", recommended3DSite || '');
+    formData.append("comparison", comparison || '');
+    formData.append("isSuitableForChildren", isSuitableForChildren || '');
+    formData.append("extra", extra || '');
+    formData.append("aboutYou", aboutYou || '');
+
+    axios.post('https://script.google.com/macros/s/AKfycbyFvoqAcLY9eVU1ZffL7P8dmt_HtroHgwzVawHu2VzqaQMNuyO_nhynsySIvpaHFA/exec', formData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then(() => alert(translate("thanksSubmission", language))).finally(() => navigate("/"))
   }
 
   return (
