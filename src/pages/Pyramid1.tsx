@@ -12,8 +12,9 @@ const Cone1: React.FC<propType> = (props) => {
 
   useEffect(() => {
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    const {duration} = performance.measure('finished');
     if (sessionStorage.getItem('Pyramid1') === null) {
-      sessionStorage.setItem('Pyramid1', String(loadTime))
+      sessionStorage.setItem('Pyramid1', `${loadTime}, ${Math.trunc(duration)}`)
     }
   }, []);
 

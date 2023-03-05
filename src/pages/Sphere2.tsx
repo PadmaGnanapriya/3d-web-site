@@ -11,8 +11,9 @@ const Page: React.FC<propType> = (props) => {
 
   useEffect(() => {
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    const {duration} = performance.measure('finished');
     if (sessionStorage.getItem('Sphere2') === null) {
-      sessionStorage.setItem('Sphere2', String(loadTime))
+      sessionStorage.setItem('Sphere2', `${loadTime}, ${Math.trunc(duration)}`)
     }
   }, []);
 

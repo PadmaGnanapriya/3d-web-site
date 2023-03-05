@@ -11,9 +11,11 @@ const Cube2: React.FC<propType> = (props) => {
 
   useEffect(() => {
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    const {duration} = performance.measure('finished');
     if (sessionStorage.getItem('Cube2') === null) {
-      sessionStorage.setItem('Cube2', String(loadTime))
+      sessionStorage.setItem('Cube2', `${loadTime}, ${Math.trunc(duration)}`)
     }
+
   }, []);
 
   const [dragEndX, setDragEndX] = useState(-20);

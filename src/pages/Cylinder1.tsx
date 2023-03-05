@@ -12,8 +12,9 @@ const Cylinder1: React.FC<propType> = (props) => {
 
   useEffect(() => {
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    const {duration} = performance.measure('finished');
     if (sessionStorage.getItem('Cylinder1') === null) {
-      sessionStorage.setItem('Cylinder1', String(loadTime))
+      sessionStorage.setItem('Cylinder1', `${loadTime}, ${Math.trunc(duration)}`)
     }
   }, []);
 

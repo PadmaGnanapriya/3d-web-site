@@ -11,8 +11,9 @@ const ChristmasTree2: React.FC<propType> = (props) => {
 
   useEffect(() => {
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    const {duration} = performance.measure('finished');
     if (sessionStorage.getItem('ChristmasTree2') === null) {
-      sessionStorage.setItem('ChristmasTree2', String(loadTime))
+      sessionStorage.setItem('ChristmasTree2', `${loadTime}, ${Math.trunc(duration)}`)
     }
   }, []);
 
@@ -44,6 +45,7 @@ const ChristmasTree2: React.FC<propType> = (props) => {
     setDragEndX(event.clientX);
     setDragEndY(event.clientY);
   }
+
   return (
     < div className="gradient-bg">
       <h1>{translate("christmasTree", language)} 2 <span>(Non ThreeJs Powered)</span></h1>

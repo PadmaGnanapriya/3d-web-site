@@ -10,10 +10,22 @@ type propType = {
 const ChristmasTree1: React.FC<propType> = (props) => {
   const {language} = props;
 
+  /**
+   *       window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart measures the
+      time it takes for the page's DOM to be fully loaded and parsed. This is useful for measuring the time it
+      takes for the user to see and interact with the content on the page.
+   *       performance.measure('load') measures the time it takes for the entire page, including all resources
+      (images, stylesheets, scripts, etc.) to be loaded and rendered. This is useful for measuring the time it
+      takes for the page to be fully loaded and for all elements to be visible.
+   *       Therefore, which method to use depends on what exactly you want to measure. If you want to measure only
+      the DOM load time, use the first method. If you want to measure the full page load time, including all
+      resources, use the second method.
+   */
   useEffect(() => {
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+    const {duration} = performance.measure('finished');
     if (sessionStorage.getItem('ChristmasTree1') === null) {
-      sessionStorage.setItem('ChristmasTree1', String(loadTime))
+      sessionStorage.setItem('ChristmasTree1', `${loadTime}, ${Math.trunc(duration)}`)
     }
   }, []);
 
