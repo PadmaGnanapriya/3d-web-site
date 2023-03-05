@@ -216,41 +216,6 @@ const Home: React.FC<propType> = (props) => {
     }
   }
 
-  const resultObj = {
-    cube1LoadTime,
-    cube2LoadTime,
-    Cylinder1LoadTime,
-    Cylinder2LoadTime,
-    pyramid1LoadTime,
-    pyramid2LoadTime,
-    sphere1LoadTime,
-    sphere2LoadTime,
-    christmasTree1LoadTime,
-    christmasTree2LoadTime,
-    ip,
-    OSName,
-    OSVersion,
-    userBrowser,
-    deviceType,
-    screen: {width: window.screen.width, height: window.screen.height},
-    maxTouchPoints: navigator.maxTouchPoints,
-    cores: navigator.hardwareConcurrency,
-    role,
-    network,
-    ratingForThreeJsPowered,
-    ratingForNonThreeJsPowered,
-    isThreeJsDelayed,
-    isThreeJsNavigable,
-    isNonThreeJsNavigable,
-    isThreeJsLoadingTimeImpact,
-    isNonThreeJsLoadingTimeImpact,
-    recommended3DSite,
-    comparison,
-    isSuitableForChildren,
-    extra,
-    aboutYou
-  }
-
   const onSubmitForm = async () => {
     setValidating(true);
     if (

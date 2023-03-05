@@ -39,7 +39,7 @@ function App() {
       <>
         <br/>
         <br/>
-        <img src={loadingImg}/>
+        <img src={loadingImg} alt="loading"/>
         <h2>Loading ...</h2>
       </>
     )
