@@ -49,6 +49,16 @@ const Home: React.FC<propType> = (props) => {
       <Link to="/feedback">
         <button className="feedback-btn">{translate("feedback", language)} </button>
       </Link>
+
+      <br/>
+      <div className="notice">
+        <p>
+          Mobile: +94 76 632 8189<br/>
+          email: <a href = "mailto: padmaisuru@gmail.com">padmaisuru@gmail.com</a>
+          <br/>
+        </p>
+      </div>
+      <br/>
     </>
   )
 }
