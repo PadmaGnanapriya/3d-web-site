@@ -25,7 +25,7 @@ const Home: React.FC<propType> = (props) => {
   const christmasTree2LoadTime = sessionStorage.getItem('ChristmasTree2');
 
   const isDisabled = !(cube1LoadTime && cube2LoadTime && Cylinder1LoadTime && Cylinder2LoadTime &&
-    pyramid1LoadTime && pyramid2LoadTime && sphere1LoadTime && sphere2LoadTime)
+    pyramid1LoadTime && pyramid2LoadTime && sphere1LoadTime && sphere2LoadTime && christmasTree1LoadTime && christmasTree2LoadTime)
 
   const [validating, setValidating] = useState(false);
   const [ip, setIP] = useState('');
@@ -50,8 +50,8 @@ const Home: React.FC<propType> = (props) => {
     {value: 'parent', label: translate('parent', language)},
     {value: 'Student', label: translate('Student', language)},
     {value: 'professor', label: translate('professor', language)},
-    {value: 'School administrator or principal', label:translate('SchoolAdministrator', language)},
-    {value: 'Education policy maker', label:translate('EducationPolicyMaker', language)},
+    {value: 'School administrator or principal', label: translate('SchoolAdministrator', language)},
+    {value: 'Education policy maker', label: translate('EducationPolicyMaker', language)},
     {value: 'Education consultant or expert', label: translate('EducationConsultant', language)},
     {value: 'software Engineer', label: translate('softwareEngineer', language)},
     {value: 'other', label: translate('other', language)},
@@ -360,18 +360,22 @@ const Home: React.FC<propType> = (props) => {
         {
           isDisabled &&
             <small>{translate("disabledError", language)}<br/>
-              {cube1LoadTime === null ? <><Link to="../cube">Cube 1,</Link>&nbsp;</> : ''}
-              {cube2LoadTime === null ? <><Link to="../cube-2">Cube 2,</Link>&nbsp;</> : ''}
-              {Cylinder1LoadTime === null ? <><Link to="../cylinder">Cylinder 1,</Link>&nbsp;</> : ''}
-              {Cylinder2LoadTime === null ? <><Link to="../cylinder-2">Cylinder 2,</Link>&nbsp;</> : ''}
-              {pyramid1LoadTime === null ? <><Link to="../pyramid">Pyramid 1,</Link>&nbsp;</> : ''}
-              {pyramid2LoadTime === null ? <><Link to="../pyramid-2">Pyramid 2,</Link>&nbsp;</> : ''}
-              {sphere1LoadTime === null ? <><Link to="../sphere">Sphere 1,</Link>&nbsp;</> : ''}
-              {sphere2LoadTime === null ? <><Link to="../sphere-2">Sphere 2,</Link>&nbsp;</> : ''}
-              {christmasTree1LoadTime === null ? <><Link to="../christmas-tree-1">Christmas Tree
-                1,</Link>&nbsp;</> : ''}
-              {christmasTree2LoadTime === null ? <><Link to="../christmas-tree-2">Christmas Tree
-                2,</Link>&nbsp;</> : ''}
+              {cube1LoadTime === null ? <><Link to="../cube">{translate("cube", language)} 1,</Link>&nbsp;</> : ''}
+              {cube2LoadTime === null ? <><Link to="../cube-2">{translate("cube", language)} 2,</Link>&nbsp;</> : ''}
+              {Cylinder1LoadTime === null ? <><Link
+                to="../cylinder">{translate("cylinder", language)} 1,</Link>&nbsp;</> : ''}
+              {Cylinder2LoadTime === null ? <><Link
+                to="../cylinder-2">{translate("cylinder", language)} 2,</Link>&nbsp;</> : ''}
+              {pyramid1LoadTime === null ? <><Link
+                to="../pyramid">{translate("pyramid", language)} 1,</Link>&nbsp;</> : ''}
+              {pyramid2LoadTime === null ? <><Link
+                to="../pyramid-2">{translate("pyramid", language)} 2,</Link>&nbsp;</> : ''}
+              {sphere1LoadTime === null ? <><Link
+                to="../sphere">{translate("sphere", language)} 1,</Link>&nbsp;</> : ''}
+              {sphere2LoadTime === null ? <><Link
+                to="../sphere-2">{translate("sphere", language)} 2,</Link>&nbsp;</> : ''}
+              {christmasTree1LoadTime === null ? <><Link to="../christmas-tree-1">{translate("christmasTree", language)} 1,</Link>&nbsp;</> : ''}
+              {christmasTree2LoadTime === null ? <><Link to="../christmas-tree-2">{translate("christmasTree", language)} 2,</Link>&nbsp;</> : ''}
             </small>
         }
       </div>
