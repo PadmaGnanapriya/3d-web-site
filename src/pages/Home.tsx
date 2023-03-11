@@ -51,7 +51,7 @@ const Home: React.FC<propType> = (props) => {
       </Link>
 
       <br/>
-      <div className="notice">
+      <div className="notice-home">
         <p>
           Mobile: +94 76 632 8189<br/>
           email: <a href = "mailto: padmaisuru@gmail.com">padmaisuru@gmail.com</a>
