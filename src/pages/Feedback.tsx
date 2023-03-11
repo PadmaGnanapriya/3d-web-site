@@ -84,8 +84,9 @@ const Home: React.FC<propType> = (props) => {
   const booleanOptions = [
     {value: 'yes', label: translate("yes", language)},
     {value: 'no', label: translate("no", language)},
-    {value: 'mayBe', label: translate("mayBe", language)},
   ]
+  // {value: 'mayBe', label: translate("mayBe", language)},
+
   const threeDType = [
     {value: 'ThreeJs powered', label: 'ThreeJs Powered'},
     {value: 'Non ThreeJs powered', label: 'Non ThreeJs Powered'},
