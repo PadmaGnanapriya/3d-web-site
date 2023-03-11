@@ -15,6 +15,7 @@ const Sphere2 = React.lazy(() => import("./pages/Sphere2"));
 const Feedback = React.lazy(() => import("./pages/Feedback"));
 const ChristmasTree1 = React.lazy(() => import("./pages/ChristmasTree1"));
 const ChristmasTree2 = React.lazy(() => import("./pages/ChristmasTree2"));
+const ThankYouPage  = React.lazy(() => import("./pages/ThankYouPage"));
 
 function App() {
   const [language, setLanguage] = useState('EN');
@@ -73,6 +74,7 @@ function App() {
               <Route path='/feedback' element={<Feedback language={language}/>}/>
               <Route path='/christmas-tree' element={<ChristmasTree1 language={language}/>}/>
               <Route path='/christmas-tree-2' element={<ChristmasTree2 language={language}/>}/>
+              <Route path='/thank-you' element={<ThankYouPage language={language}/>}/>
             </Routes>
           </BrowserRouter>
         </Suspense>

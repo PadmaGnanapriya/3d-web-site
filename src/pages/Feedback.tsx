@@ -27,6 +27,7 @@ const Home: React.FC<propType> = (props) => {
   const isDisabled = !(cube1LoadTime && cube2LoadTime && Cylinder1LoadTime && Cylinder2LoadTime &&
     pyramid1LoadTime && pyramid2LoadTime && sphere1LoadTime && sphere2LoadTime && christmasTree1LoadTime && christmasTree2LoadTime)
 
+  const [submitting, setSubmitting] = useState(false);
   const [validating, setValidating] = useState(false);
   const [ip, setIP] = useState('');
   const [role, setRole] = useState<string | null>('');
@@ -94,7 +95,7 @@ const Home: React.FC<propType> = (props) => {
   ]
 
   const aboutPlaceHolder = role === 'School Teacher'
-    ? "Eg: \nI'm Nalinda Samansiri, and I work as a math teacher at Mahinda College Galle."
+    ? "Eg: \nI'm Nalinda Samansiri, and I work as a maths teacher at Mahinda College Galle."
     : "Eg: \nI'm Nalinda Samansiri, and I work as an IT lecturer at ESOFT Metro Campus, Galle."
 
   //creating function to load ip address from the API
@@ -219,6 +220,7 @@ const Home: React.FC<propType> = (props) => {
 
   const onSubmitForm = async () => {
     setValidating(true);
+    setSubmitting(true);
     if (
       role === '' ||
       network === '' ||
@@ -234,6 +236,7 @@ const Home: React.FC<propType> = (props) => {
       isSuitableForChildren === ''
     ) {
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      setSubmitting(false);
       return
     }
     const formData = new FormData();
@@ -274,7 +277,7 @@ const Home: React.FC<propType> = (props) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
-    }).then(() => alert(translate("thanksSubmission", language))).finally(() => navigate("/"))
+    }).then(() => setSubmitting(true)).finally(() => navigate("/thank-you"))
   }
 
   return (
@@ -357,7 +360,7 @@ const Home: React.FC<propType> = (props) => {
       <textarea rows={5} onChange={(e: any) => setAboutYou(e.target.value)} placeholder={aboutPlaceHolder}/>
 
       <div className="text-align-center">
-        <button disabled={isDisabled} className="feedback-btn" onClick={onSubmitForm}> Submit</button>
+        <button disabled={isDisabled || submitting} className="feedback-btn" onClick={onSubmitForm}> Submit</button>
         {
           isDisabled &&
             <small>{translate("disabledError", language)}<br/>
